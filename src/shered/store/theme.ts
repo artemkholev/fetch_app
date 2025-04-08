@@ -6,7 +6,6 @@ import { LocalStorageConstants } from '@/shered/constants/ls.constants';
 export const useThemeStore = defineStore('theme', () => {
   const isDarkTheme = ref(getBooleanValueFromLs(LocalStorageConstants.THEME) || false);
 
-  //methods
   const toggleTheme = (value: boolean) => {
     isDarkTheme.value = value;
     setBooleanValueFromLs(LocalStorageConstants.THEME, value);

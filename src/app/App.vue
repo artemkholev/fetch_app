@@ -3,5 +3,3 @@
     <router-view />
   </component>
 </template>
-
-<style src="./index.scss" lang="scss" scoped></style>

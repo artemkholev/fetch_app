@@ -1,7 +1,11 @@
-import { createRouter, createWebHistory, type RouteLocationNormalizedLoaded } from "vue-router";
-import { Links, PathNames } from '@/shered/constants/route.constants';
-import MainLayout from '@/widgets/mainLayout/MainLayout.vue';
-import MainPage from "@/pages/mainPage/MainPage.vue";
+import {
+  createRouter,
+  createWebHistory,
+  type RouteLocationNormalizedLoaded,
+} from "vue-router";
+import { Links, PathNames } from "@/shered/constants/route.constants";
+import { MainLayout } from "@/widgets/mainLayout";
+import { MainPage } from "@/pages/main";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -12,65 +16,55 @@ const router = createRouter({
       component: MainPage,
       meta: {
         layout: MainLayout,
-        title: 'Главная',
+        title: "Главная",
         breadcrumb: () => [
           {
-            title: 'Главная'
-          }
-        ]
-      }
+            title: "Главная",
+          },
+        ],
+      },
     },
     {
       path: Links.POSTS,
       name: PathNames.POSTS,
-      component: () => import('@/pages/postsPage/PostsPage.vue'),
+      component: () => import("@/pages/posts").then((r) => r.PostsPage),
       meta: {
         layout: MainLayout,
-        title: 'Список постов',
+        title: "Список постов",
         breadcrumb: (route: RouteLocationNormalizedLoaded) => [
           {
-            title: 'Главная',
-            link: Links.HOME
+            title: "Главная",
+            link: Links.HOME,
           },
           {
             title: route.meta.title,
-          }
-        ]
-      }
+          },
+        ],
+      },
     },
     {
       path: `${Links.POSTS}/:id`,
       name: PathNames.POST,
-      component: () => import('@/pages/postPage/PostPage.vue'),
+      component: () => import("@/pages/post").then((r) => r.PostPage),
       meta: {
         layout: MainLayout,
-        title: 'Пост',
+        title: "Пост",
         breadcrumb: (route: RouteLocationNormalizedLoaded) => [
           {
-            title: 'Главная',
-            link: Links.HOME
+            title: "Главная",
+            link: Links.HOME,
           },
           {
-            title: 'Список постов',
-            link: Links.POSTS
+            title: "Список постов",
+            link: Links.POSTS,
           },
           {
-            title: 'Пост № '+ route.params.id as string
-          }
-        ]
-      }
+            title: ("Пост № " + route.params.id) as string,
+          },
+        ],
+      },
     },
-  ]
+  ],
 });
-
-// router.beforeEach((to, from, next) => {
-//   const isAuth = ref(true);
-//   if (to.meta.requiredAuth && !isAuth.value) {
-//     alert('Нужна авторизация!');
-//     next({ name: PathNames.HOME });
-//   } else {
-//     next();
-//   }
-// });
 
 export default router;
