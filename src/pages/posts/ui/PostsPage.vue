@@ -7,6 +7,7 @@
     <p v-if="isLoading" :style="{ margin: '10px' }">Loading...</p>
     <p v-if="isError" :style="{ margin: '10px', color: 'red' }">
       Ошибка: {{ isError }}
+      (Если списки постов не подгрузились пробема на стороне сервака, откуда беру данные, презагрузка страницы должна решить проблему) - https://jsonplaceholder.typicode.com/
     </p>
     <div class="page__wrapper">
       <div
